@@ -4,6 +4,8 @@
 
 import json
 
+#datastructure = lists and dictionaries inside each other
+
 #JSON data either in string or datastructure
 #datastructure = lists and dictionarites inside each other
 #datastructure allows one to use python methods (for lists and dictionaries)
