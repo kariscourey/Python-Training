@@ -66,4 +66,30 @@ def return_num(num):
 print(return_num(5)) #should print 15
 
 #Exercise
-#not done!!
+#make decorator favtory which returns a decorator that decorates functions with one argument
+#factory should take one argument (correct_type), a type, and then returns the decorator that makes function check if input is correct type
+#it it's wrong, print bad type
+
+def type_check(correct_type):
+    def check(function1):
+        def function2 (arg):
+            if(isinstance(arg,correct_type)):
+                return function1(arg)
+            else:
+                print("bad type")
+        return function2
+    return check
+
+@type_check(int)
+def times2(num):
+    return num*2
+
+print(times2(2))
+times2('Not A Number')
+
+@type_check(str)
+def first_letter(word):
+    return word[0]
+
+print(first_letter('Hello World'))
+first_letter(['Not', 'A', 'String'])
