@@ -162,7 +162,6 @@ print(len(list))
 #randomize order of items in list
 # from random import random
 # # list.sort(key=random)
-from operator import truediv
 from random import shuffle
 shuffle(list) ##this one!!
 # list = list.shuffle() #list has no attribute shuffle!
@@ -283,3 +282,74 @@ list = [6,7,8,9]
 if 5 not in list: ##this one!
 # if 5 ~ list:
     print("5 not in list")
+
+#Strings
+
+#initialize multi-line string
+# string = "this is a\n" . "multiline"
+string = '''Multiline string'''
+print(string)
+
+#concetanate
+string = "hello" + " everyone!"
+print(string)
+
+#length
+print(len(string))
+
+#check if string appears in another string
+if "fun" in "this is fun":
+    print('contains fun')
+    
+#check index of substring in another string
+print("this is fun".index("fun"))
+
+#check if string only has digits
+string = "11111"
+# if isnumber(string): #isnumber not defined
+# if isdigit(string): #isdigit not defined
+if string.isdigit():
+    print(string)
+# if string.isnumber(): #string has no attribute isnumber
+#     print(string)
+
+#check if string starts with another string
+if "substring".startswith("sub"):
+    print("yes!")
+
+#joing string with comma delimiter
+# print(["foo","bar"].join(",")) #no attribute join
+# print(",".join["foo","bar"]) 
+# print(",".join("foo","bar")) 
+# print("," + ["foo","bar"])
+list = ["foo","bar"]
+joined = ",".join(list)
+print(joined)
+print(",".join(["foo","bar"]))
+
+#split string to list with delimiter
+string = "foo, bar"
+print("foo,bar".split(","))
+
+#capitalize all words in string
+print(string.capitalize())
+# print(capitalize(string)) #nope!
+# print([x.capitalize() for x in "yo yo yo".split()].join(" "))
+print(" ".join([x.capitalize() for x in "yo yo yo".split()]))
+
+#Print number using a format string
+number = 2
+print("%d" %number)
+
+#print number using f string
+#https://realpython.com/python-f-strings/
+number = 412
+print(f"{number}")
+
+#print number using string format function
+print("{number}".format(number=number))
+
+#find index of substring within a string
+print("this is fun".find("fun"))
+
+#Conditions
