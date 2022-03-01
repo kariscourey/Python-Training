@@ -162,6 +162,7 @@ print(len(list))
 #randomize order of items in list
 # from random import random
 # # list.sort(key=random)
+from multiprocessing.dummy import Namespace
 from random import shuffle
 shuffle(list) ##this one!!
 # list = list.shuffle() #list has no attribute shuffle!
@@ -401,3 +402,138 @@ if name == "Karis":
         print("Not 24")
 else:
     print("Not Karis")
+
+#For Loop
+primes = [2,3,5,7]
+for i in primes:
+    print(i)
+
+#While Loop
+count = 0
+while count <5:
+    print(count)
+    count+=1
+
+#exit loop
+# count = 0
+# while True:
+#     print(count)
+#     count+=1
+#     if count >= 5:
+#         pass #will loop forever!
+count = 0
+while True:
+    print(count)
+    count+=1
+    if count >= 8:
+        break
+
+#skip current block and proceed to next loop
+for x in range(10):
+    if x%2 == 0:
+        continue
+    print(x)
+
+#use else clause for a loop
+count = 3
+while count <12:
+    print(count)
+    count+=1
+else:
+    print("count value reached %d" %count)
+
+#nested loop
+names = ["Karis","Karl","Kayla","Kurt","Kale"]
+foods = ["chips","popcorn","pretzels"]
+for i in names:
+    for j in foods:
+        print(i + "likes" + j)
+
+#infinite loop
+# while names:
+#     print(names.pop()) #pop removes item at given index from list and returns the removed item
+# while True:
+#     if not names:
+#         break
+#     print(names.pop()) #nope!
+# do: #no do
+# if not names:
+#     break
+# print(names.pop())
+# while True #nope!
+# for True:
+#     if not names:
+#         break
+#     print(names.pop()) #nope! can't assign to true
+
+# a = ['foo', 'bar', 'baz', 'qux', 'corge']
+# while a:
+#     if len(a) < 3:
+#         continue
+#     print(a.pop())
+# print('Done.')
+
+#correct way to iterate over range of numbers
+for x in range(30):
+    print(x)
+
+#wrong way to implement a loop
+x = 0
+while True:
+    print(x)
+    x+=1
+    if (x>4):
+        break 
+
+x = 10
+while x < 20:
+    print(x)
+    x +=1
+
+#print only even numbers
+for x in range(10):
+    if x%2 == 0:
+        print(x)
+    continue 
+
+print("Alternatively...")
+
+# for x in range(10):
+#     if x%2 == 1:
+#         break
+#     print(x) #nope!
+
+for x in range(10):
+    if x%2 != 0:
+        continue
+    print(x)
+
+#run exactly 10 iterations
+# for n in range(1,10):
+#     print(n) #nope!
+
+for n in range(10,20,1):
+    print(n)
+
+#b = 23
+a = 1
+b = 2
+while a<5:
+    b += a
+    a += 1
+
+a = 1
+b = 2
+while a <10:
+    b += a
+    a += 2
+
+a = 2
+b = 3
+while a <10:
+    b+=a
+    a+=2
+
+print(b)
+print(a)
+
