@@ -162,9 +162,124 @@ print(len(list))
 #randomize order of items in list
 # from random import random
 # # list.sort(key=random)
+from operator import truediv
 from random import shuffle
 shuffle(list) ##this one!!
 # list = list.shuffle() #list has no attribute shuffle!
 # list.shuffle()
 print(list)
 
+#Basic Operators
+
+#add
+a = 3
+b = 4
+c = a + b
+print(c)
+
+#subtract
+c = b-a
+print(c)
+
+#multiply
+c = a*b
+print(c)
+
+#divide
+c = (a+4)/b
+print(c)
+
+#power
+c = a ** b
+print(c)
+
+#concetanate
+a = "blue"
+b = "dog"
+c = a+b
+print(c)
+
+#substring
+# c = a.substring(2,3) #nope! string doesn't have attribute substring
+c = a[1:3]
+print(c)
+
+#fetch all numbers at even indices of list
+c = [1,2,3,4,5,6,7,8,9,10,11,12]
+c = c[::2]
+print(c)
+c = c[1::2]
+print(c)
+
+#concetenate lists
+a = [1,2,3,4,5]
+b = [11,10,9,8]
+c = a + b
+print(c)
+
+#integer division operator
+a = 22
+b = 7
+# c = a div b nope!
+c = a//b #returns closest integer less than or equal to result
+print(c)
+
+#modulus
+c = a%b 
+print(c)
+
+#check if one number greater than other
+if a > b: #>> and << are bit shift operators
+    print("a is greater than b")
+
+#check if variable between two numbers
+if b < 10 < a:
+    print("10 is between a and b")
+
+#check if two variables are true
+a = True
+b = True
+# if (a,b) is True:
+#     # print("a and b are true") #nope!
+if a and b:
+    print("a and b are true")
+
+# if a == True and b == True: #single = DOES NOT WORK!!
+#     print("a and b are true!")
+
+#execute bitwise AND operation between numbers
+#https://wiki.python.org/moin/BitwiseOperators
+c = a & b
+print(c)
+
+#bitwise XOR (exclusive OR)
+#https://www.geeksforgeeks.org/python-bitwise-operators/
+c = a ^ b
+print(c)
+
+#bitwise shift right
+c = a >> b
+print(c)
+
+a = []
+
+#wrong way to check variable is not True
+if a != True:
+    print("a not true")
+
+# if a !== True:
+#     print("a not true!") #invalid syntax
+
+if not a:
+    print("a not true!!") #wrong way!!
+
+if a is not True:
+    print("a is not True")
+
+#check is member is not part of iterable
+list = [6,7,8,9]
+# if 5 is not in list: #syntax invalid
+# if not list.contains(5): #no attribute contains
+if 5 not in list: ##this one!
+# if 5 ~ list:
+    print("5 not in list")
