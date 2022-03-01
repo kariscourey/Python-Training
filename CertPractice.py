@@ -162,6 +162,7 @@ print(len(list))
 #randomize order of items in list
 # from random import random
 # # list.sort(key=random)
+from ast import Pass
 from multiprocessing.dummy import Namespace
 from random import shuffle
 from tkinter import Y
@@ -635,3 +636,117 @@ print(add2(3))
 # add = lambda x,y:x+y 
 # add2 = add(5)
 # print(add2(3))
+
+#Classes and Objects
+
+#create a class
+class Person:
+    name = "John"
+    age = 23
+
+print(type(Person))
+
+#create instance object of class
+class MyClass:
+    pass
+instance = MyClass()
+print(instance)
+
+#check if an object is an instance of the class
+cat = "meow" 
+print(isinstance(cat, MyClass)) #isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument)
+print(isinstance(instance, MyClass))
+
+#assign initial values to object properties when object is created
+class Number:
+    def __init__(self,value):
+        self.value = value 
+    
+#example
+class fruit:            
+    def __init__(self,color,shape):      
+               self.color=color                 
+               self.shape=shape             
+    def sayhi(self):         
+               print(f"Hi.\nI am {self.color}and{self.shape}")       
+orange=fruit('Orange','Round')
+orange.sayhi()
+
+#corect way to define object method    ##object = collection of data (variables) and methods (functions) that act on those data
+# class Dog:
+#     bark = def(self):
+#         print("bark!") #nope!
+
+# class Dog:
+#     @method 
+#     def bark():
+#         print("bark!") #nope!
+
+class Dog:
+    def bark(self):
+        print("bark!") #this one!!
+
+# class Dog:
+#     bark(self):
+#     print("bark!") #nope!
+
+#correct way to access current instance of class from its method
+
+value = 2
+
+# class MyClass:
+#     def get_value(self):
+#         return self::value  #nope!
+
+# class MyClass:
+#     def get_value():
+#         return value 
+
+# class MyClass:
+#     def get_value(self):
+#         return self.value 
+
+# class MyClass:
+#     def get_value():
+#         return this.value 
+
+instance = MyClass()
+
+#set property of object #https://www.geeksforgeeks.org/python-property-function/
+
+#example
+# Python program to explain property() function
+# Alphabet class
+ 
+class Alphabet:
+    def __init__(self, value):
+        self._value = value
+ 
+    # getting the values
+    def getValue(self):
+        print('Getting value')
+        return self._value
+ 
+    # setting the values
+    def setValue(self, value):
+        print('Setting value to ' + value)
+        self._value = value
+ 
+    # deleting the values
+    def delValue(self):
+        print('Deleting value')
+        del self._value
+ 
+    value = property(getValue, setValue,
+                     delValue, )
+ 
+ 
+# passing the value
+x = Alphabet('GeeksforGeeks')
+print(x.value)
+ 
+x.value = 'GfG'
+ 
+del x.value
+
+#need to come back to classes and objects!!!
