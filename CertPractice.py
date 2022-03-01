@@ -164,6 +164,7 @@ print(len(list))
 # # list.sort(key=random)
 from multiprocessing.dummy import Namespace
 from random import shuffle
+from tkinter import Y
 shuffle(list) ##this one!!
 # list = list.shuffle() #list has no attribute shuffle!
 # list.shuffle()
@@ -537,3 +538,100 @@ while a <10:
 print(b)
 print(a)
 
+#Functions
+
+#define function
+def myfunc(name,age):
+    print(name + "is" + str(age) + "years old")
+
+print(myfunc("Karis",24))
+print(myfunc(name="Karis",age=23))
+
+#does not return None
+def func():
+    print("Hello!")
+
+print(func())
+
+#recursive factorial calculator
+def fact(x):
+    if x ==1:
+        return 1
+    else:
+        return(x*fact(x-1))
+print(fact(4))
+
+#https://book.pythontips.com/en/latest/args_and_kwargs.html
+
+#use args #*args is used to send a non-keyworded variable length argument list to the function.
+def func(name,age,*args): #*args in function definitions in python is used to pass a variable number of arguments to a function. It is used to pass a non-key worded, variable-length argument list. The syntax is to use the symbol * to take in a variable number of arguments
+    for v in args:
+        print(v)
+
+#use kwargs #**kwargs allows you to pass keyworded variable length of arguments to a function #**kwargs if you want to handle named arguments in a function
+def func(name,age,**kwargs): #
+    for v in kwargs:
+        print(v)
+
+#wrong way to use function
+def sum(a,b):
+    return a + b
+def multiply(a,b):
+    return a*b
+print(multiply(sum(3,4),5))
+
+# def sum(a,b):
+#     def multiply(a,b):
+#         return a*b
+#     return a+b 
+# print(multiply(sum(3.4),5)) #sum() missing 1 required positional argument: 'b'
+
+def sum(a,b): return a + b
+print(sum(3,4))
+
+def func(name,age):
+    def nest(a):
+        return a + 1
+    print("Next year" + name + "will be" + str(nest(age)))
+func("Karis",24)
+
+#lambda
+# values = [1,2,3]
+# multiples = map(lambda x: x*2,values)
+# print(list(multiples))
+
+#lamba with 2 args
+add = lambda x,y:x+y 
+print(add(3,2))
+
+#define func which returns lambda fun that multiples number by given arg of original function
+# def mult(x):
+#     return lambda n:n*x 
+# print(mult(2))
+
+# def mult(x):
+#     return lambda x:n*x
+# print(mult(2))
+
+# def func(x):
+#     return lambda n,x: n*x
+# print(func(2))
+
+#wrong way of defining partial function with first arg prefilled as value 1
+add = lambda x,y:x+y 
+add2 = lambda x: add(x,5)
+print(add2(3))
+
+import functools
+add = lambda x,y:x+y 
+add2 = functools.partial(add,5)
+print(add2(3))
+
+add = lambda x,y:x+y 
+def add2(x):
+    return add(x,5)
+print(add2(3))
+
+# add = lambda x,y:x+y 
+# add2 = add(5)
+# print(add2(3))
