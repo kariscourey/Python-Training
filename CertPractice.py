@@ -750,3 +750,90 @@ x.value = 'GfG'
 del x.value
 
 #need to come back to classes and objects!!!
+
+#Dictionaries
+
+#wrong way to merge dictionaries
+dict_a = {"Me" : "Cat", "You" : "Dog"}
+dict_b = {"Her": "Bird", "Him": "Fish"}
+
+# new_dict = {}
+# new_dict.update(dict_a)
+# new_dict.update(dict_b) #works!
+
+# new_dict = {**dict_a,**dict_b} #works!
+
+# new_dict = dict_a + dict_b #this one doesn't work!
+
+new_dict = dict_a | dict_b  #works!
+
+print(new_dict)
+
+#check if member in dict
+if "Me" in new_dict:
+    print("it's in!") #works only for keys!
+
+# if new_dict.contains("Her"):
+#     print("yup!") #no attribute "contains"
+
+# if "Her" | new_dict:
+#     print("ok!") #nope!
+
+#remove item from dict
+# new_dict.remove("Me") #nope!
+del new_dict["Her"]
+# new_dict["Him"].delete() #nope!
+# new_dict["You"] = None #replaces value with None 
+print(new_dict)
+
+#wrong way to fetch keys in dict
+wow = {"Me" : "Cat", "You" : "Dog", "Her": "Bird", "Him": "Fish"}
+print(wow)
+keys = wow.keys() #works!
+# keys = [x for x in wow] #works!
+# keys = []
+# for x in wow:
+#     keys.append(x) #works!
+# keys = [x[1] for x in wow()] #doesn't work!
+print(keys)
+
+#fetch all values in dict
+values = wow.values()
+print(values)
+
+#empty dict
+wow.clear() 
+print(wow)
+
+#get value from dict that doesn't raise exception for missing keys
+d = {"a": 2, "c": 3}
+v = d.get("b") #https://stackoverflow.com/questions/6755655/handle-undeclared-dict-key-in-python#:~:text=If%20you%20want%20to%20get,if%20the%20key%20is%20missing.&text=To%20just%20check%20if%20a,in%20or%20not%20in%20keywords.
+print(v) 
+
+#set value in a way that doesn't override existing values
+# d.set("a",4,update=False) #no attribute set
+# d["a"] = 4 if "a" not in d else None #sets a to None
+# d.setdefault("a",4)
+d.setdefault("b",4) #works!
+# d["a"] = 4 #updates existing key value 
+print(d)
+
+#wrong way of deleting value of key "key" from dict
+d = {"Key": 2, "Key2": 3}
+# d.remove("Key") #no attribute remove!
+# del d["Key"] #works!
+# d.pop("Key",None) #works!
+# d = {key:val for key, val in d.items() if key != "Key"} #works!
+print(d)
+
+#wrong way of creating dict from 2 lists of keys and values
+keys, values = ["a","b","c"], [1,2,3]
+# d = dict(zip(keys,values)) #works!
+# d.fromkeys(keys,values) #doesn't work!
+# d = {}
+# for x in range(len(keys)):
+#     d[keys[x]] = values [x] #works!
+# d = {keys[x]:values[x] for x in range(len(keys))} #works!
+print(d)
+
+#Modules and Packages
