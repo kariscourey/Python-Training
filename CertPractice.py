@@ -352,4 +352,52 @@ print("{number}".format(number=number))
 #find index of substring within a string
 print("this is fun".find("fun"))
 
+
 #Conditions
+a = 1
+b = 2
+
+if a == b: # := is assignment operator
+    print("a = b")
+else:
+    print("no")
+
+if a != b: print("aaaaaaaa") #else: print("bbbbbb") #else doesn't work on single line
+
+#complex condition
+name = "Kayla"
+age = 24
+if name == "Karis" and age == 24:
+    print("yeah!")
+
+#print output
+# if not True == True:
+#     print("hello!") #nope!
+if True or False and False:
+    print("hey!")
+
+#check multiple conditions
+if name == "Karis":
+    print(name)
+elif age == 24: #no else if! elif!
+    print(age)
+else:
+    print("boo!")
+
+#if statement with no context
+if name == "Karis":
+    pass
+
+#ternary operator = conditional expression; allows testing a condition in a single line replacing the multiline if-else making the code compact
+result = "John" if name == "John" else "Jane" #works!
+# result = name == "Karis" and "Karis" or "Jane" #works!
+print(result)
+
+#nested if
+if name == "Karis":
+    if age == 24:
+        print("Karis and 24")
+    else:
+        print("Not 24")
+else:
+    print("Not Karis")
