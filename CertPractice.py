@@ -892,3 +892,35 @@ print(dir(ImportPrintHello))
 #dynamically import module using function
 
 #List Comprehensions
+
+#previous example ... output = [result for member in iterable if condition]
+sentence = "the quick brown fox jumps over the lazy dog"
+words = sentence.split()
+word_lengths = [len(word) for word in words if word != "the"]
+print(words)
+print(word_lengths)
+
+#create new list from list of numbers with only even numbers
+numbers = [1,2,3,4,5,6,7,8]
+even_numbers = [x for x in numbers if x%2==0]
+print(even_numbers)
+
+#capitalize a list of words
+words = ["blue","cat","mouse"]
+capped = [x.capitalize() for x in words]
+print(capped)
+
+#creat dict with cap keys out of another dict
+d = {"me":"no","you":"yes","them":"ok"}
+capped_d = {x[0].capitalize(): x[1] for x in d.items()}
+print(capped_d)
+
+#sum abs val of list
+numbers = [-1,2,-3,4]
+sumabs = [abs(x) for x in numbers]
+# sumabs = [abs(x) for x in sum(numbers)]
+# sumabs = sum([abs(x) for x in numbers])
+# sumabs = [sum(abs(x)) for x in numbers]
+print(sumabs)
+
+#omit filter in list comprehension
