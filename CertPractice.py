@@ -917,10 +917,164 @@ print(capped_d)
 
 #sum abs val of list
 numbers = [-1,2,-3,4]
-sumabs = [abs(x) for x in numbers]
+# sumabs = [abs(x) for x in numbers] 
 # sumabs = [abs(x) for x in sum(numbers)]
 # sumabs = sum([abs(x) for x in numbers])
 # sumabs = [sum(abs(x)) for x in numbers]
-print(sumabs)
+# print(sumabs)
 
 #omit filter in list comprehension
+words = ["blue","cat","mouse"]
+capped = [x.capitalize() for x in words]
+print(capped) #don't include if
+
+#create set of all letters used in string
+# lets = [letter for letter in "hello"] #prints list, "h", "e", "l","l","o"
+# lets = [letter for letter in "hello".split()] #prints list, "hello"
+lets = {letter for letter in "hello"}
+# lets = {letter for letter in set(["hello"])} #prints set, "hello"
+print(lets)
+print(type(lets))
+
+#switch between keys and values of dict
+dict = {"Yo":"Yes","No":"Nes","Wo":"Wes"}
+revdict = {x[1]:x[0] for x in dict.items()}
+print(revdict)
+
+#all squares of numbers 0-9
+sq = [x**2 for x in range(10)]
+print(sq)
+
+#get list of all numbers from 0-99 which are divisible by 3 and 5
+div = [x for x in range(100) if x%3 == 0 if x%5 == 0]
+print(div)
+
+#flatten nested list (a list of lists of numbers)
+list1 = [1,2,3,4,5]
+list2 = [6,7,8,9,10]
+list3 = [11,12,13,14,15]
+listall = [list1,list2,list3]
+flat = [x for y in listall for x in y]
+print(flat)
+
+#create list of tuples in range (0,0)-(2,2)
+tups = [(x,y) for x in range(3) for y in range (3)]
+print(tups)
+
+#Regular Expressions
+
+#import reg ex object
+import re
+pattern = r"\d+"
+re_obj = re.compile(pattern)
+# re_obj=re.match(pattern) #missing 1 required positional argument
+# re_obj = r"\d+" #string
+# re_obj = /\d+/ #invalid
+print(type(re_obj))
+print(re_obj)
+
+#search for regex pattern at beginning of string
+#https://www.guru99.com/python-regular-expressions-complete-tutorial.html#:~:text=match()%20function%20of%20re,it%20returns%20the%20match%20object.
+#re.match() only searches first line (beginning of string)
+#re.search() searchs ALL lines
+string = "123"
+if re.match(pattern,string):
+    print("Found")
+
+#search anywhere in string
+string = "Some text. 123"
+if re.search(pattern,string):
+    print("Found!")
+
+#split string by occurrences of regex pattern
+string = "Some text. 123. Some text"
+# occurrences = re.findall(pattern,string)
+# print(string.split(occurrences)) #nope!
+# re_obj = re.compile(pattern)
+# print(string.split(re_obj)) #nope!
+# print(string.split(pattern,type="regex")) #nope!
+print(re.split(pattern,string))
+
+#replace all occurrences of regex pattern in a string
+string = "Some text. 123. Some text. 321"
+replacement = "Some text"
+# print(replacement.join(string.split(pattern)))
+print(re.sub(pattern,replacement,string))
+
+#wrong way to fetch all occurrences of regex pattern in string
+string = "Some text. 123. Some text. 321"
+re_obj = re.compile(pattern)
+print(re_obj.findall(string))  #works!
+# print(re_obj.search(string))  #doesn't work!
+# print(re.findall(pattern,string)) #works!
+# occurrences = re.finditer(pattern,string)
+# print([o.group() for o in occurrences])  #works!
+
+#find how many occurrences of regex pattern were replaced in a string
+string = "Some text. 123. Some text. 321. 421"
+replacement = "Some text"
+# repcount = re.subn(pattern,replacement,string) #returns tuple
+# result, repcount = re.sub(pattern,replacement,string) #nope!
+result, repcount = re.subn(pattern,replacement,string)
+print(repcount)
+print(type(repcount))
+
+#wrong way to get part of string where there was a match
+string = "Some text. 123"
+matcho = re.match(pattern,string)
+# print(matcho.group()) #no attribute group
+# print(matcho[0]) #not subscriptable / nope!
+# print(matcho.groups()[0]) #no attribute group
+# print(matcho.group(0)) #no attribute group
+
+#find substring that matched last capturing group of regex
+pattern = r"(\d+)(\d+)?"
+string = "123 text"
+matcho = re.match(pattern,string)
+# print(matcho.groups()[-1]) #returns none!
+print(matcho.group(matcho.lastindex)) #works!
+# print(matcho.groups()[matcho.lastindex]) #returns none!
+# print (matcho.lastgroup) #returns none!
+
+#contains two characters
+#https://stackoverflow.com/questions/12871066/what-exactly-is-a-raw-string-regex-and-how-can-you-use-it
+# '\n' #one character, containes newline
+# r"\n" #\n = two characters
+# r"\\n" #\\n = three characters
+# r"{\n}" #
+
+#wrong way to perform case-insensitive matching
+pattern = r"hello"
+string = "hEllo, how are you?"
+
+re_obj = re.compile(pattern,re.IGNORECASE)
+if re_obj.match(string):
+    print("found")
+
+re_obj = re.compile(pattern,re.I)
+if re_obj.search(string):
+    print("found!")
+
+if re.findall(pattern, string, re.IGNORECASE):
+    print("found!!")
+
+# pattern = r"/hello/i"
+# re_obj = re.compile(pattern)
+# if re_obj.search(string):
+#     print("found!!!") #doesn't work!
+
+#split string by multiple delimiters
+string = "Some text; 123, Some text, 123"
+pattern = r"[,;]"
+print(re.split(pattern,string))
+
+#capture any two characters except newline between py and on
+#https://www.w3resource.com/python/python-regular-expression.php
+string = "python"
+pattern = r"py..on"
+if re.search(pattern,string):
+    print("Found!")
+else:
+    print("ahh")
+
+#specify pattern that captures shortest possible match
