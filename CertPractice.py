@@ -164,6 +164,7 @@ print(len(list))
 # # list.sort(key=random)
 from ast import Pass
 from multiprocessing.dummy import Namespace
+import py_compile
 from random import shuffle
 from tkinter import Y
 shuffle(list) ##this one!!
@@ -837,3 +838,57 @@ keys, values = ["a","b","c"], [1,2,3]
 print(d)
 
 #Modules and Packages
+
+#import module
+# import Fibo
+
+#import object from module into current namespace
+# from Fibo import fib, fib2 
+# fib(50)
+
+#import all objects from module into current namespace
+# from Fibo import * 
+# fib(50)
+
+#import module under custom name
+# import Fibo as WOAH
+# WOAH.fib(20)
+
+#tell python interpreter where to search during import
+# PYTHONPATH=/Fibo.py #PYTHONPATH is environmental variable; specify additional directories to look for modules in
+# sys.path.append("/GitHub") #adds GitHub directory to list of paths to look for modules in; execute BEFORE running import
+
+#wrong way to explore imported module
+# import Fibo
+# help(Fibo)
+# print(Fibo.__dict__.keys())
+# print(repr(Fibo))
+# print(dir(Fibo))
+
+#conditionally import module
+# v = "cat"
+# if v == "cat":
+#     import Fibo as pet
+# else:
+#     import Sets as pet
+# pet.play()
+
+#prints hello when first imported #__init__ makes Python treat directories containing the file as packages
+import ImportPrintHello
+
+#import module from package  ##packages are just containers for modules or sub-packages
+#great resource: https://docs.python.org/3/tutorial/modules.html
+#dir1.dir2.my_module
+
+#access a module imported from a package
+#import dir1.dir2.my_module
+#print(dir(my_module))
+print(dir(ImportPrintHello))
+
+#specify imported module must be located within same package
+
+#prevent names from being imported with "from... import*" statement
+
+#dynamically import module using function
+
+#List Comprehensions
