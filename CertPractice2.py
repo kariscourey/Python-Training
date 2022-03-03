@@ -364,10 +364,64 @@ cool.pop()
 print(cool)
 
 #KeyError
-cool = set([5,6,77,8])
+cool = set()
 # cool.discard(77) #works!
-# cool.difference_update({2}) #works!
+# cool.difference_update({77}) #works!
 # cool.clear()
-# cool.pop()
+# cool.pop() #raises KeyError if set is empty
 print(cool)
 
+#find number of elements in set
+cool = set([5,23,1,3])
+print(len(cool))
+
+#element comparison
+a = set([45,12,1,2])
+b = set([45,3,5,7,12])
+print(a.union(b)) #combines
+print(a.intersection(b)) #items in both sets!
+print(a.symmetric_difference(b)) #items of both sets that don't have overlap
+print(a.difference(b)) #items in a that aren't in b
+
+#check if a contains every element in of set b
+a = set([45,12,1,2,3])
+b = set([45,12,1,2])
+# print(b in a)  #doesn't work
+print(b <= a) #checks if b contains every element of a
+# print(a>>b) #unsupported operand type
+print(a.issuperset(b)) #checks if a contains every element of b
+print(b.issuperset(a)) #checks if b contains every element of a
+print(a.issubset(b)) #checks if b contains every element of a (checks if a is a subset of b)
+print(b.issubset(a)) #checks if a contains every element of b (checks if b is a subset of a)
+
+#check if a has no elements in common with b
+a = set([6,7,8])
+print(a.isdisjoint(b))
+
+#remove duplicate elements from list
+list1 = [1,2,3,4,4,4] #if parantheses, initializes as tuple
+print(type(list1))
+set2 = set(list1)
+print(type(set2))
+print(set2)
+
+#build set using set comprehension
+#https://python-reference.readthedocs.io/en/latest/docs/comprehensions/set_comprehension.html
+# myset = {x**2 for x in [1,2,3,4]}
+# myset = set({x:x**2 for x in [1,2,3,4]}) #doesn't square
+# myset = set([x**2 for x in [1,2,3,4]]) #works but i assume this is more list comprehension
+myset = set(x**2 for x in [1,2,3,4]) #works but i assume this is more list comprehension
+print(myset)
+print(type(myset))
+
+#insert element from b into a
+a = set([6,7,8,2,3])
+b = set([45,12,1,2])
+a.update(b)
+print(a)
+
+#operators can be used instead of "set" object methods
+print(a.union(b) == a|b)
+print(a.intersection(b) == a&b)
+print(a.difference(b) == a-b)
+print(a.symmetric_difference(b) == a^b)
