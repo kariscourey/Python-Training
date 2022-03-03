@@ -703,9 +703,9 @@ value = 2
 #     def get_value():
 #         return value 
 
-# class MyClass:
-#     def get_value(self):
-#         return self.value 
+class MyClass:
+    def get_value(self):
+        return self.value  #this one!
 
 # class MyClass:
 #     def get_value():
@@ -714,274 +714,320 @@ value = 2
 instance = MyClass()
 
 #set property of object #https://www.geeksforgeeks.org/python-property-function/
+class gfg:
+    def __init__(self,value):
+        self._value=value
+    
+    def getter(self):
+        print("getting value")
+        return self._value 
 
-#example
-# Python program to explain property() function
-# Alphabet class
- 
-class Alphabet:
-    def __init__(self, value):
-        self._value = value
- 
-    # getting the values
-    def getValue(self):
-        print('Getting value')
-        return self._value
- 
-    # setting the values
-    def setValue(self, value):
-        print('Setting value to ' + value)
-        self._value = value
- 
-    # deleting the values
-    def delValue(self):
-        print('Deleting value')
+    def setter(self,value):
+        print("setting value to" + value)
+
+    def deleter(self):
+        print("deleting value")
         del self._value
- 
-    value = property(getValue, setValue,
-                     delValue, )
- 
- 
-# passing the value
-x = Alphabet('GeeksforGeeks')
+
+    value = property(getter,setter,deleter, )
+
+
+# x = gfg("coding!").property(getter,setter,deleter)
+
+x = gfg("Happy coding!")
 print(x.value)
- 
-x.value = 'GfG'
- 
-del x.value
 
-#need to come back to classes and objects!!!
+x.value = "Hey coder!" #here! set property of object
+del x.value #deletes property of object
+print(type(x))
 
-#Dictionaries
+#deleting an object
+del x
 
-#wrong way to merge dictionaries
-dict_a = {"Me" : "Cat", "You" : "Dog"}
-dict_b = {"Her": "Bird", "Him": "Fish"}
+#define subclass
+#https://pybit.es/articles/python-subclasses/
+#class SubClass(SuperClass)
 
-# new_dict = {}
-# new_dict.update(dict_a)
-# new_dict.update(dict_b) #works!
+class Boss(object):
+    def __init__(self,name,attitude,behavior,face):
+        self.name = name
+        self.attitude = attitude
+        self.behavior = behavior 
+        self.face = face
 
-# new_dict = {**dict_a,**dict_b} #works!
+    def get_attitude(self):
+        return self.attitude
 
-# new_dict = dict_a + dict_b #this one doesn't work!
+    def get_behavior(self):
+        return self.behavior
 
-new_dict = dict_a | dict_b  #works!
+    def get_face(self):
+        return self.face
 
-print(new_dict)
+class GoodBoss(Boss): #GoodBoss will inherit everything from Boss
+    def __init__(self, name, attitude, behavior, face,laugh): #have to specify all attributes from Boss, but can add whatever GoodBoss attributes we want
+        super().__init__(name,attitude,behavior,face) 
+        self.laugh = laugh 
 
-#check if member in dict
-if "Me" in new_dict:
-    print("it's in!") #works only for keys!
+    def print_laugh(self):
+        print(self.laugh)
 
-# if new_dict.contains("Her"):
-#     print("yup!") #no attribute "contains"
+    def nurture_talent(self):
+        print("Employees feel great!")
 
-# if "Her" | new_dict:
-#     print("ok!") #nope!
+    def encourage(self):
+        print("Team cheers!")
 
-#remove item from dict
-# new_dict.remove("Me") #nope!
-del new_dict["Her"]
-# new_dict["Him"].delete() #nope!
-# new_dict["You"] = None #replaces value with None 
-print(new_dict)
+karis = GoodBoss("Karis","Positive","Friendly","Smiling","Loud")
 
-#wrong way to fetch keys in dict
-wow = {"Me" : "Cat", "You" : "Dog", "Her": "Bird", "Him": "Fish"}
-print(wow)
-keys = wow.keys() #works!
-# keys = [x for x in wow] #works!
-# keys = []
-# for x in wow:
-#     keys.append(x) #works!
-# keys = [x[1] for x in wow()] #doesn't work!
-print(keys)
+karis.print_laugh()
 
-#fetch all values in dict
-values = wow.values()
-print(values)
+#shortest and correct way to create a class
+class Empty: pass
 
-#empty dict
-wow.clear() 
-print(wow)
+print(type(Empty))
 
-#get value from dict that doesn't raise exception for missing keys
-d = {"a": 2, "c": 3}
-v = d.get("b") #https://stackoverflow.com/questions/6755655/handle-undeclared-dict-key-in-python#:~:text=If%20you%20want%20to%20get,if%20the%20key%20is%20missing.&text=To%20just%20check%20if%20a,in%20or%20not%20in%20keywords.
-print(v) 
+#call super class constructor when initializing subclass instance
+#https://www.kite.com/python/answers/how-to-invoke-the-super-constructor-of-a-class-in-python#:~:text=Use%20super()%20to%20invoke,the%20constructor%20of%20the%20superclass.
+class BadBoss(Boss):
+    def __init__(self):
+        super().__init__()
+        print("Super constructor")
 
-#set value in a way that doesn't override existing values
-# d.set("a",4,update=False) #no attribute set
-# d["a"] = 4 if "a" not in d else None #sets a to None
-# d.setdefault("a",4)
-d.setdefault("b",4) #works!
-# d["a"] = 4 #updates existing key value 
-print(d)
-
-#wrong way of deleting value of key "key" from dict
-d = {"Key": 2, "Key2": 3}
-# d.remove("Key") #no attribute remove!
-# del d["Key"] #works!
-# d.pop("Key",None) #works!
-# d = {key:val for key, val in d.items() if key != "Key"} #works!
-print(d)
-
-#wrong way of creating dict from 2 lists of keys and values
-keys, values = ["a","b","c"], [1,2,3]
-# d = dict(zip(keys,values)) #works!
-# d.fromkeys(keys,values) #doesn't work!
-# d = {}
-# for x in range(len(keys)):
-#     d[keys[x]] = values [x] #works!
-# d = {keys[x]:values[x] for x in range(len(keys))} #works!
-print(d)
-
-#Modules and Packages
-
-#import module
-# import Fibo
-
-#import object from module into current namespace
-# from Fibo import fib, fib2 
-# fib(50)
-
-#import all objects from module into current namespace
-# from Fibo import * 
-# fib(50)
-
-#import module under custom name
-# import Fibo as WOAH
-# WOAH.fib(20)
-
-#tell python interpreter where to search during import
-# PYTHONPATH=/Fibo.py #PYTHONPATH is environmental variable; specify additional directories to look for modules in
-# sys.path.append("/GitHub") #adds GitHub directory to list of paths to look for modules in; execute BEFORE running import
-
-#wrong way to explore imported module
-# import Fibo
-# help(Fibo)
-# print(Fibo.__dict__.keys())
-# print(repr(Fibo))
-# print(dir(Fibo))
-
-#conditionally import module
-# v = "cat"
-# if v == "cat":
-#     import Fibo as pet
-# else:
-#     import Sets as pet
-# pet.play()
-
-#prints hello when first imported #__init__ makes Python treat directories containing the file as packages
-import ImportPrintHello
-
-#import module from package  ##packages are just containers for modules or sub-packages
-#great resource: https://docs.python.org/3/tutorial/modules.html
-#dir1.dir2.my_module
-
-#access a module imported from a package
-#import dir1.dir2.my_module
-#print(dir(my_module))
-print(dir(ImportPrintHello))
-
-#specify imported module must be located within same package
-#https://realpython.com/absolute-vs-relative-python-imports/#:~:text=Relative%20imports%20make%20use%20of,that%20is%2C%20the%20directory%20above.
-#use dot notation to specify location
-#ssingle dot = module or package is referenced in same directory as current location
-#double dot = it is in parent directory of current location (e.g. directory above)
-#three dot = in grandparent directory, etc.
-#from .some_module import some_class
-#from ..some_package import some_function
-#from . import some_class
-
-#prevent names from being imported with "from... import*" statement
-# __hidden_name__ = "value"
-# __hidden_name = "value"
-# _hidden_name = "value"
-# private hidden_name = "value"
-#https://stackoverflow.com/questions/12117087/python-hide-methods-with
-#https://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python
+#correct way to create static method within class
 
 
-#dynamically import module using function
+
+# #Dictionaries
+
+# #wrong way to merge dictionaries
+# dict_a = {"Me" : "Cat", "You" : "Dog"}
+# dict_b = {"Her": "Bird", "Him": "Fish"}
+
+# # new_dict = {}
+# # new_dict.update(dict_a)
+# # new_dict.update(dict_b) #works!
+
+# # new_dict = {**dict_a,**dict_b} #works!
+
+# # new_dict = dict_a + dict_b #this one doesn't work!
+
+# new_dict = dict_a | dict_b  #works!
+
+# print(new_dict)
+
+# #check if member in dict
+# if "Me" in new_dict:
+#     print("it's in!") #works only for keys!
+
+# # if new_dict.contains("Her"):
+# #     print("yup!") #no attribute "contains"
+
+# # if "Her" | new_dict:
+# #     print("ok!") #nope!
+
+# #remove item from dict
+# # new_dict.remove("Me") #nope!
+# del new_dict["Her"]
+# # new_dict["Him"].delete() #nope!
+# # new_dict["You"] = None #replaces value with None 
+# print(new_dict)
+
+# #wrong way to fetch keys in dict
+# wow = {"Me" : "Cat", "You" : "Dog", "Her": "Bird", "Him": "Fish"}
+# print(wow)
+# keys = wow.keys() #works!
+# # keys = [x for x in wow] #works!
+# # keys = []
+# # for x in wow:
+# #     keys.append(x) #works!
+# # keys = [x[1] for x in wow()] #doesn't work!
+# print(keys)
+
+# #fetch all values in dict
+# values = wow.values()
+# print(values)
+
+# #empty dict
+# wow.clear() 
+# print(wow)
+
+# #get value from dict that doesn't raise exception for missing keys
+# d = {"a": 2, "c": 3}
+# v = d.get("b") #https://stackoverflow.com/questions/6755655/handle-undeclared-dict-key-in-python#:~:text=If%20you%20want%20to%20get,if%20the%20key%20is%20missing.&text=To%20just%20check%20if%20a,in%20or%20not%20in%20keywords.
+# print(v) 
+
+# #set value in a way that doesn't override existing values
+# # d.set("a",4,update=False) #no attribute set
+# # d["a"] = 4 if "a" not in d else None #sets a to None
+# # d.setdefault("a",4)
+# d.setdefault("b",4) #works!
+# # d["a"] = 4 #updates existing key value 
+# print(d)
+
+# #wrong way of deleting value of key "key" from dict
+# d = {"Key": 2, "Key2": 3}
+# # d.remove("Key") #no attribute remove!
+# # del d["Key"] #works!
+# # d.pop("Key",None) #works!
+# # d = {key:val for key, val in d.items() if key != "Key"} #works!
+# print(d)
+
+# #wrong way of creating dict from 2 lists of keys and values
+# keys, values = ["a","b","c"], [1,2,3]
+# # d = dict(zip(keys,values)) #works!
+# # d.fromkeys(keys,values) #doesn't work!
+# # d = {}
+# # for x in range(len(keys)):
+# #     d[keys[x]] = values [x] #works!
+# # d = {keys[x]:values[x] for x in range(len(keys))} #works!
+# print(d)
+
+# #Modules and Packages
+
+# #import module
+# # import Fibo
+
+# #import object from module into current namespace
+# # from Fibo import fib, fib2 
+# # fib(50)
+
+# #import all objects from module into current namespace
+# # from Fibo import * 
+# # fib(50)
+
+# #import module under custom name
+# # import Fibo as WOAH
+# # WOAH.fib(20)
+
+# #tell python interpreter where to search during import
+# # PYTHONPATH=/Fibo.py #PYTHONPATH is environmental variable; specify additional directories to look for modules in
+# # sys.path.append("/GitHub") #adds GitHub directory to list of paths to look for modules in; execute BEFORE running import
+
+# #wrong way to explore imported module
+# # import Fibo
+# # help(Fibo)
+# # print(Fibo.__dict__.keys())
+# # print(repr(Fibo))
+# # print(dir(Fibo))
+
+# #conditionally import module
+# # v = "cat"
+# # if v == "cat":
+# #     import Fibo as pet
+# # else:
+# #     import Sets as pet
+# # pet.play()
+
+# #prints hello when first imported #__init__ makes Python treat directories containing the file as packages
+# import ImportPrintHello
+
+# #import module from package  ##packages are just containers for modules or sub-packages
+# #great resource: https://docs.python.org/3/tutorial/modules.html
+# #dir1.dir2.my_module
+
+# #access a module imported from a package
+# #import dir1.dir2.my_module
+# #print(dir(my_module))
+# print(dir(ImportPrintHello))
+
+# #specify imported module must be located within same package
+# #https://realpython.com/absolute-vs-relative-python-imports/#:~:text=Relative%20imports%20make%20use%20of,that%20is%2C%20the%20directory%20above.
+# #use dot notation to specify location
+# #ssingle dot = module or package is referenced in same directory as current location
+# #double dot = it is in parent directory of current location (e.g. directory above)
+# #three dot = in grandparent directory, etc.
+# #from .some_module import some_class
+# #from ..some_package import some_function
+# #from . import some_class
+
+# #prevent names from being imported with "from... import*" statement
+# # __hidden_name__ = "value"
+# # __hidden_name = "value"
+# # _hidden_name = "value"
+# # private hidden_name = "value"
+# #https://stackoverflow.com/questions/12117087/python-hide-methods-with
+# #https://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python
+
+
+# #dynamically import module using function
+# # name = "Fibo"
+# # fibo = eval("import %s" %name)
+# # print(fibo) #nope!
+# # name = "Fibo"
+# # fibo = import name
+# # print(fibo) #nope!
 # name = "Fibo"
-# fibo = eval("import %s" %name)
-# print(fibo) #nope!
-# name = "Fibo"
-# fibo = import name
-# print(fibo) #nope!
-name = "Fibo"
-fibo = __import__(name) #yup!
+# fibo = __import__(name) #yup!
 
 
-#List Comprehensions
+# #List Comprehensions
 
-# #previous example ... output = [result for member in iterable if condition]
-# sentence = "the quick brown fox jumps over the lazy dog"
-# words = sentence.split()
-# word_lengths = [len(word) for word in words if word != "the"]
-# print(words)
-# print(word_lengths)
+# # #previous example ... output = [result for member in iterable if condition]
+# # sentence = "the quick brown fox jumps over the lazy dog"
+# # words = sentence.split()
+# # word_lengths = [len(word) for word in words if word != "the"]
+# # print(words)
+# # print(word_lengths)
 
-# #create new list from list of numbers with only even numbers
-# numbers = [1,2,3,4,5,6,7,8]
-# even_numbers = [x for x in numbers if x%2==0]
-# print(even_numbers)
+# # #create new list from list of numbers with only even numbers
+# # numbers = [1,2,3,4,5,6,7,8]
+# # even_numbers = [x for x in numbers if x%2==0]
+# # print(even_numbers)
 
-# #capitalize a list of words
-# words = ["blue","cat","mouse"]
-# capped = [x.capitalize() for x in words]
-# print(capped)
+# # #capitalize a list of words
+# # words = ["blue","cat","mouse"]
+# # capped = [x.capitalize() for x in words]
+# # print(capped)
 
-# #creat dict with cap keys out of another dict
-# d = {"me":"no","you":"yes","them":"ok"}
-# capped_d = {x[0].capitalize(): x[1] for x in d.items()}
-# print(capped_d)
+# # #creat dict with cap keys out of another dict
+# # d = {"me":"no","you":"yes","them":"ok"}
+# # capped_d = {x[0].capitalize(): x[1] for x in d.items()}
+# # print(capped_d)
 
-# #sum abs val of list
-# numbers = [-1,2,-3,4]
-# # sumabs = [abs(x) for x in numbers] 
-# # sumabs = [abs(x) for x in sum(numbers)]
-# # sumabs = sum([abs(x) for x in numbers])
-# # sumabs = [sum(abs(x)) for x in numbers]
-# # print(sumabs)
+# # #sum abs val of list
+# # numbers = [-1,2,-3,4]
+# # # sumabs = [abs(x) for x in numbers] 
+# # # sumabs = [abs(x) for x in sum(numbers)]
+# # # sumabs = sum([abs(x) for x in numbers])
+# # # sumabs = [sum(abs(x)) for x in numbers]
+# # # print(sumabs)
 
-# #omit filter in list comprehension
-# words = ["blue","cat","mouse"]
-# capped = [x.capitalize() for x in words]
-# print(capped) #don't include if
+# # #omit filter in list comprehension
+# # words = ["blue","cat","mouse"]
+# # capped = [x.capitalize() for x in words]
+# # print(capped) #don't include if
 
-# #create set of all letters used in string
-# # lets = [letter for letter in "hello"] #prints list, "h", "e", "l","l","o"
-# # lets = [letter for letter in "hello".split()] #prints list, "hello"
-# lets = {letter for letter in "hello"}
-# # lets = {letter for letter in set(["hello"])} #prints set, "hello"
-# print(lets)
-# print(type(lets))
+# # #create set of all letters used in string
+# # # lets = [letter for letter in "hello"] #prints list, "h", "e", "l","l","o"
+# # # lets = [letter for letter in "hello".split()] #prints list, "hello"
+# # lets = {letter for letter in "hello"}
+# # # lets = {letter for letter in set(["hello"])} #prints set, "hello"
+# # print(lets)
+# # print(type(lets))
 
-# #switch between keys and values of dict
-# dict = {"Yo":"Yes","No":"Nes","Wo":"Wes"}
-# revdict = {x[1]:x[0] for x in dict.items()}
-# print(revdict)
+# # #switch between keys and values of dict
+# # dict = {"Yo":"Yes","No":"Nes","Wo":"Wes"}
+# # revdict = {x[1]:x[0] for x in dict.items()}
+# # print(revdict)
 
-# #all squares of numbers 0-9
-# sq = [x**2 for x in range(10)]
-# print(sq)
+# # #all squares of numbers 0-9
+# # sq = [x**2 for x in range(10)]
+# # print(sq)
 
-# #get list of all numbers from 0-99 which are divisible by 3 and 5
-# div = [x for x in range(100) if x%3 == 0 if x%5 == 0]
-# print(div)
+# # #get list of all numbers from 0-99 which are divisible by 3 and 5
+# # div = [x for x in range(100) if x%3 == 0 if x%5 == 0]
+# # print(div)
 
-# #flatten nested list (a list of lists of numbers)
-# list1 = [1,2,3,4,5]
-# list2 = [6,7,8,9,10]
-# list3 = [11,12,13,14,15]
-# listall = [list1,list2,list3]
-# flat = [x for y in listall for x in y]
-# print(flat)
+# # #flatten nested list (a list of lists of numbers)
+# # list1 = [1,2,3,4,5]
+# # list2 = [6,7,8,9,10]
+# # list3 = [11,12,13,14,15]
+# # listall = [list1,list2,list3]
+# # flat = [x for y in listall for x in y]
+# # print(flat)
 
-# #create list of tuples in range (0,0)-(2,2)
-# tups = [(x,y) for x in range(3) for y in range (3)]
-# print(tups)
+# # #create list of tuples in range (0,0)-(2,2)
+# # tups = [(x,y) for x in range(3) for y in range (3)]
+# # print(tups)
 
