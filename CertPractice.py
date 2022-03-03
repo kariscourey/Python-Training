@@ -886,78 +886,102 @@ import ImportPrintHello
 print(dir(ImportPrintHello))
 
 #specify imported module must be located within same package
+#https://realpython.com/absolute-vs-relative-python-imports/#:~:text=Relative%20imports%20make%20use%20of,that%20is%2C%20the%20directory%20above.
+#use dot notation to specify location
+#ssingle dot = module or package is referenced in same directory as current location
+#double dot = it is in parent directory of current location (e.g. directory above)
+#three dot = in grandparent directory, etc.
+#from .some_module import some_class
+#from ..some_package import some_function
+#from . import some_class
 
 #prevent names from being imported with "from... import*" statement
+# __hidden_name__ = "value"
+# __hidden_name = "value"
+# _hidden_name = "value"
+# private hidden_name = "value"
+#https://stackoverflow.com/questions/12117087/python-hide-methods-with
+#https://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python
+
 
 #dynamically import module using function
+# name = "Fibo"
+# fibo = eval("import %s" %name)
+# print(fibo) #nope!
+# name = "Fibo"
+# fibo = import name
+# print(fibo) #nope!
+name = "Fibo"
+fibo = __import__(name) #yup!
+
 
 #List Comprehensions
 
-#previous example ... output = [result for member in iterable if condition]
-sentence = "the quick brown fox jumps over the lazy dog"
-words = sentence.split()
-word_lengths = [len(word) for word in words if word != "the"]
-print(words)
-print(word_lengths)
+# #previous example ... output = [result for member in iterable if condition]
+# sentence = "the quick brown fox jumps over the lazy dog"
+# words = sentence.split()
+# word_lengths = [len(word) for word in words if word != "the"]
+# print(words)
+# print(word_lengths)
 
-#create new list from list of numbers with only even numbers
-numbers = [1,2,3,4,5,6,7,8]
-even_numbers = [x for x in numbers if x%2==0]
-print(even_numbers)
+# #create new list from list of numbers with only even numbers
+# numbers = [1,2,3,4,5,6,7,8]
+# even_numbers = [x for x in numbers if x%2==0]
+# print(even_numbers)
 
-#capitalize a list of words
-words = ["blue","cat","mouse"]
-capped = [x.capitalize() for x in words]
-print(capped)
+# #capitalize a list of words
+# words = ["blue","cat","mouse"]
+# capped = [x.capitalize() for x in words]
+# print(capped)
 
-#creat dict with cap keys out of another dict
-d = {"me":"no","you":"yes","them":"ok"}
-capped_d = {x[0].capitalize(): x[1] for x in d.items()}
-print(capped_d)
+# #creat dict with cap keys out of another dict
+# d = {"me":"no","you":"yes","them":"ok"}
+# capped_d = {x[0].capitalize(): x[1] for x in d.items()}
+# print(capped_d)
 
-#sum abs val of list
-numbers = [-1,2,-3,4]
-# sumabs = [abs(x) for x in numbers] 
-# sumabs = [abs(x) for x in sum(numbers)]
-# sumabs = sum([abs(x) for x in numbers])
-# sumabs = [sum(abs(x)) for x in numbers]
-# print(sumabs)
+# #sum abs val of list
+# numbers = [-1,2,-3,4]
+# # sumabs = [abs(x) for x in numbers] 
+# # sumabs = [abs(x) for x in sum(numbers)]
+# # sumabs = sum([abs(x) for x in numbers])
+# # sumabs = [sum(abs(x)) for x in numbers]
+# # print(sumabs)
 
-#omit filter in list comprehension
-words = ["blue","cat","mouse"]
-capped = [x.capitalize() for x in words]
-print(capped) #don't include if
+# #omit filter in list comprehension
+# words = ["blue","cat","mouse"]
+# capped = [x.capitalize() for x in words]
+# print(capped) #don't include if
 
-#create set of all letters used in string
-# lets = [letter for letter in "hello"] #prints list, "h", "e", "l","l","o"
-# lets = [letter for letter in "hello".split()] #prints list, "hello"
-lets = {letter for letter in "hello"}
-# lets = {letter for letter in set(["hello"])} #prints set, "hello"
-print(lets)
-print(type(lets))
+# #create set of all letters used in string
+# # lets = [letter for letter in "hello"] #prints list, "h", "e", "l","l","o"
+# # lets = [letter for letter in "hello".split()] #prints list, "hello"
+# lets = {letter for letter in "hello"}
+# # lets = {letter for letter in set(["hello"])} #prints set, "hello"
+# print(lets)
+# print(type(lets))
 
-#switch between keys and values of dict
-dict = {"Yo":"Yes","No":"Nes","Wo":"Wes"}
-revdict = {x[1]:x[0] for x in dict.items()}
-print(revdict)
+# #switch between keys and values of dict
+# dict = {"Yo":"Yes","No":"Nes","Wo":"Wes"}
+# revdict = {x[1]:x[0] for x in dict.items()}
+# print(revdict)
 
-#all squares of numbers 0-9
-sq = [x**2 for x in range(10)]
-print(sq)
+# #all squares of numbers 0-9
+# sq = [x**2 for x in range(10)]
+# print(sq)
 
-#get list of all numbers from 0-99 which are divisible by 3 and 5
-div = [x for x in range(100) if x%3 == 0 if x%5 == 0]
-print(div)
+# #get list of all numbers from 0-99 which are divisible by 3 and 5
+# div = [x for x in range(100) if x%3 == 0 if x%5 == 0]
+# print(div)
 
-#flatten nested list (a list of lists of numbers)
-list1 = [1,2,3,4,5]
-list2 = [6,7,8,9,10]
-list3 = [11,12,13,14,15]
-listall = [list1,list2,list3]
-flat = [x for y in listall for x in y]
-print(flat)
+# #flatten nested list (a list of lists of numbers)
+# list1 = [1,2,3,4,5]
+# list2 = [6,7,8,9,10]
+# list3 = [11,12,13,14,15]
+# listall = [list1,list2,list3]
+# flat = [x for y in listall for x in y]
+# print(flat)
 
-#create list of tuples in range (0,0)-(2,2)
-tups = [(x,y) for x in range(3) for y in range (3)]
-print(tups)
+# #create list of tuples in range (0,0)-(2,2)
+# tups = [(x,y) for x in range(3) for y in range (3)]
+# print(tups)
 
