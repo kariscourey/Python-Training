@@ -314,3 +314,59 @@ except MyException as e:
 # except MyException:
 #     traceback.print_tb(sys.exc_info) #prints!
 
+#Sets
+
+#initialize set
+wow = set() #set
+# wow = set([1,2,3]) #set
+# wow = set(1,2,3) #error!
+# wow = {1,2,3} #set
+print(type(wow))
+
+#empty set
+wow = set() #{} = empty dict 
+print(wow)
+print(type(wow))
+
+#add element to set
+# wow.append("new") #nope!
+# wow.update("new ") #will add each character
+wow.add("new")
+wow.add("blue")
+wow.add("true")
+
+#make copy of set
+# wow[:]
+# from copy import copy
+# woo = copy(wow) #works!
+woo = set(wow) #works!
+# woo = wow.copy() #works!
+# woo = wow[:] #nope!!
+print(woo)
+
+#remove element from set
+woo.discard("new") #works!
+# woo -= "new" #doesn't work!
+# woo.pop("new") #doesn't work!
+# woo.remove("new") #works!
+print(woo)
+
+#remove all elements from set
+cool = set([5,6,77,8])
+# for x in cool:
+#     del x #doesn't work!
+cool.clear()
+print(cool)
+
+#remove random element from set
+cool = set([5,6,77,8])
+cool.pop()
+print(cool)
+
+#KeyError
+cool = set([5,6,77,8])
+# cool.discard(77) #works!
+# cool.difference_update({2}) #works!
+# cool.clear()
+# cool.pop()
+print(cool)
