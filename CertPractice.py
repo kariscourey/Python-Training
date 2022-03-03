@@ -795,7 +795,40 @@ class BadBoss(Boss):
         print("Super constructor")
 
 #correct way to create static method within class
+#static methods, much like class methods, are methods that are bound to a class rather than its object
+#method = function available for a given object because of object's type
+#provide a way to divide the utility methods into separate sub-modules
+#https://www.askpython.com/python/python-static-method
+#class method can access class variables but static method can’t access class variables
 
+# class Person:
+#     def __init__(self,first,last):
+#         self.first = first
+#         self.last = last
+    
+#     @staticmethod
+#     def full_name(cls,full):
+#         first,last = map(str,full.split(' '))
+#         return cls(first,last)
+
+# person = Person.full_name("Karis Courey")
+
+#wrong way to list class attributes
+class MyClass:
+    a = 1
+    b = 2
+instance = MyClass()
+print(repr(instance)) #doesn't print class attributes!
+# print(dir(instance))
+# print(type(instance).__dict__)
+# print(instance.__dir__())
+
+#wrong way to overload operators in a class
+class Number:
+    def __init__(self,value):
+        self.value = value
+    def __add__(self,other):
+        return Number(self.value + other.value)
 
 
 # #Dictionaries
