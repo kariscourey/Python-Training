@@ -824,11 +824,82 @@ print(repr(instance)) #doesn't print class attributes!
 # print(instance.__dir__())
 
 #wrong way to overload operators in a class
+#extending meaning of operators beyond their predefined operational meaning
+#from https://www.programiz.com/python-programming/operator-overloading
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.x = x
+#         self.y = y
+
+#     def __str__(self):
+#         return "({0},{1})".format(self.x, self.y)
+
+#     def __add__(self, other):
+#         x = self.x + other.x
+#         y = self.y + other.y
+#         return Point(x, y)
+# p1 = Point(1,2)
+# p2 = Point(2,3)
+
+# print(p1+p2)
+
+# class Number:
+#     def __init__(self,value):
+#         self.value = value
+#     def __eq__(self,other):
+#         return self.value == other.value #works!
+
+# class Number:
+#     def __init__(self,value):
+#         self.value = value
+#     def __mul__(self,other):
+#         return Number(self.value * other.value) #works!
+
 class Number:
     def __init__(self,value):
         self.value = value
     def __add__(self,other):
-        return Number(self.value + other.value)
+        return Number(self.value + other.value) #works!
+
+# class Number:
+#     def __init__(self,value):
+#         self.value = value
+#     def __str__(self,other):
+#         return "The value is " + str(other.value) #doesn't work!
+
+print(Number(2))
+
+#use multiple inheritance
+#from https://www.geeksforgeeks.org/multiple-inheritance-in-python/#:~:text=Inheritance%20is%20the%20mechanism%20to,would%20also%20inherit%20from%20P.
+class Base1:
+    pass
+
+class Base2:
+    pass
+
+class Derived(Base1, Base2):
+    pass
+
+
+#define abstract class
+#https://www.pythontutorial.net/python-oop/python-abstract-class/#:~:text=Python%20doesn't%20directly%20support,for%20defining%20abstract%20base%20classes.
+#abstract class is a class that cannot be instantiated
+#instantiated = creating a copy of the class which inherits all class variables and methods
+#can create classes that inherit from an abstract class
+from abc import ABC, abstractmethod
+class Abstract(ABC):
+    @abstractmethod
+    def foo(self):
+        pass 
+
+#define private method
+#from https://favtutor.com/blogs/python-private-methods
+class Class:
+  def __init__(self):
+    self.__var = 2
+
+  def __get_var(self):
+    return self.__var
 
 
 # #Dictionaries
